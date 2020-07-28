@@ -1,17 +1,21 @@
 # ngx-tribute
 
+## Note:
+
+Based on https://github.com/ladderio/ngx-tribute, upgraded to work with Tribute v5 and Angular 9
+
 This is an Angular 2+ wrapper directive for native JS library for @mentions - [tributejs](https://github.com/zurb/tribute).
 It supports contenteditable and Reactive Forms.
 
 To install:
+
 ```
-npm i tributejs ngx-tribute
+npm i tributejs @spotdraft/ngx-tribute
 ```
 
-Note: At least version `3.3.5` of `tributejs` is required.
+Note: At least version `5.1.3` of `tributejs` is required.
 
-Usage
---
+## Usage
 
 Import `NgxTributeModule`:
 
@@ -30,18 +34,17 @@ export class AppModule { }
 and use `[ngxTribute]` directive on your `input`, `textarea` or `[contenteditable]`:
 
 ```html
-<input [ngxTribute]="tributeOptions">
+<input [ngxTribute]="tributeOptions" />
 ```
 
 Import default CSS from `node_modules/tributejs/dist/tribute.css` to get a minimal working example.
 
 Check [tributejs docs](https://github.com/zurb/tribute#a-collection) for a detailed description of the configuration object.
 
-Check [a demo](https://ladderio.github.io/ngx-tribute/) and [it's code](https://github.com/ladderio/ngx-tribute/blob/master/src/app/app.component.ts)
+Check [a demo](https://ladderio.github.io/ngx-tribute/) and [it's code](https://github.com/SpotDraft/ngx-tribute/blob/master/src/app/app.component.ts)
 to see different ways of using the directive. It integrates well with template forms and reactive forms.
 
-API Docs
---
+## API Docs
 
 Inputs:
 
@@ -51,14 +54,15 @@ Inputs:
 - `[menuContainer]` - if you want to use `menuContainer` option from Tribute.js, pass element obtained
   by template ref variable here, instead of manually retrieving element from DOM. See "Using `menuContainer`"
   below for an explanation and example
-  
+
 Outputs:
 
 - `(onMentioned)` - emits the whole value of input each time when a new mention is added
 - `(mentionItemSelected)` - emits the original object of input each time when a new mention is added
+- `(onOpened)` - emitted when the list of mentions is shown to the user.
+- `(onClosed)` - emitted when the list is closed.
 
-Reactive forms
---
+## Reactive forms
 
 When using Angular reactive forms, form control value needs to be updated whenever you select any mention.
 This directive does it automatically by intercepting Angular `[formControl]` or `[formControlName]`
@@ -66,37 +70,40 @@ directive attached to the same element as Tribute.js or one of its ancestors.
 If for some reason you're not using standard directives, you can use `[implicitFormControl]`
 input to pass form control, which should be updated, directly to `ngxTribute` directive.
 
-See [demo app](https://ladderio.github.io/ngx-tribute/) and [it's code](https://github.com/ladderio/ngx-tribute/blob/master/src/app/app.component.ts) for an example.
+See [demo app](https://ladderio.github.io/ngx-tribute/) and [it's code](https://github.com/SpotDraft/ngx-tribute/blob/master/src/app/app.component.ts) for an example.
 
-Using `menuContainer`
---
+## Using `menuContainer`
 
 Tribute.js allows to pass a DOM element, to which menu should be attached, by using `menuContainer` option.
 It's a bad practice in Angular to obtain elements via `document` methods (eg. `document.getElementById()`).
 Angular gives it's own methods for accessing DOM nodes. In this case, Template Reference Variable should be used.
 
 See following example:
+
 ```typescript
 @Component({
-    template: `
-        <input [ngxTribute]="options" [menuContainer]="container">
-        <div #container></div>
-    `
+  template: `
+    <input [ngxTribute]="options" [menuContainer]="container" />
+    <div #container></div>
+  `,
 })
 class MyComponent {
-    options = {
-        values: [
-            { key: 'foo', value: 'Foo' },
-            { key: 'bar', value: 'Bar' },
-            { key: 'baz', value: 'Baz' }
-        ],
-        positionMenu: false
-    }
+  options = {
+    values: [
+      { key: "foo", value: "Foo" },
+      { key: "bar", value: "Bar" },
+      { key: "baz", value: "Baz" },
+    ],
+    positionMenu: false,
+  };
 }
 ```
 
-Contributing
---
+## Events
+
+The directive supports events `onOpened` and `onClosed` to track when the list is opened or closed. See [code](https://github.com/SpotDraft/ngx-tribute/blob/master/src/app/app.component.ts#L28)
+
+## Contributing
 
 - library code is located in `projects/ngx-tribute` and demo code in `src`
 - run `npm install` after cloning the repo
@@ -105,8 +112,7 @@ Contributing
 - whenever you change something in the library code, you need to run `npm run build-lib` to see that changes in demo app
 - after finishing, run `npm run build-demo` to rebuild a demo app
 
-Story behind this lib
---
+## Story behind this lib
 
 We were rewriting a project from AngularJS 1.5 to Angular 2 and faced the lack of a good library for @mentions in the new Angular.
 There were some, but we needed a good support for `[contenteditable]`, and none of existing solutions satisfied our needs.

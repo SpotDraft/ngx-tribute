@@ -1,6 +1,6 @@
 {
-  "name": "ngx-tribute",
-  "version": "1.5.1",
+  "name": "@spotdraft/ngx-tribute",
+  "version": "2.0.0",
   "peerDependencies": {
     "@angular/common": ">=6.0.0 <9.0.0",
     "@angular/core": ">=6.0.0 <9.0.0",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ladderio/ngx-tribute.git"
+    "url": "git+https://github.com/SpotDraft/ngx-tribute.git"
   },
   "keywords": [
     "mentions",
@@ -22,10 +22,10 @@
     "angular",
     "angular2"
   ],
-  "author": "Adrian Slipko <slipko.adrian@gmail.com>",
+  "author": "Adrian Slipko <slipko.adrian@gmail.com>; Anirudh Varma<anirudh@spotdraft.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ladderio/ngx-tribute/issues"
+    "url": "https://github.com/SpotDraft/ngx-tribute/issues"
   },
-  "homepage": "https://github.com/ladderio/ngx-tribute#readme"
+  "homepage": "https://github.com/SpotDraft/ngx-tribute#readme"
 }
